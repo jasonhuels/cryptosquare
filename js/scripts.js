@@ -3,6 +3,8 @@ $(function() {
     var input = $("#input").val().toLowerCase();
     var reg = /^[a-z]+$/;
     var sentence = "";
+    var crypto = "";
+    var output = "";
 
     for(let i=0; i<input.length; i++) {
       if(reg.test(input.charAt(i))) {
@@ -11,20 +13,17 @@ $(function() {
     }
 
     var rows = Math.ceil(Math.sqrt(sentence.length));
-    var cols = 0;
+    var cols = Math.floor(Math.sqrt(sentence.length));
 
-    if(Math.sqrt(sentence.length) % 1 === 0) {
-      cols = rows;
-    } else {
-      cols = rows-1;
+    for(let a=0; a<rows-1; a++) {
+      for(let i=0; i<sentence.length; i+=cols) {
+        if(sentence[i+a]) {
+          crypto += sentence[i+a];
+        }
+      }
     }
 
-
-    for(let i=0; i<sentence.length; i+=cols) {
-      console.log(sentence[i]);
-    }
-
-
+    console.log(crypto);
     event.preventDefault();
   });
 });
